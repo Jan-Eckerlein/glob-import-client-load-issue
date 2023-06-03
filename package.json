@@ -13,5 +13,8 @@
     "@astrojs/svelte": "^2.2.0",
     "astro": "^2.5.7",
     "svelte": "^3.59.1"
+  },
+  "stackblitz": {
+    "startCommand": "npm install && npm run dev"
   }
 }
