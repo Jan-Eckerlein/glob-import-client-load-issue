@@ -1,15 +1,39 @@
 ---
+// The classic way to import a component but it's not dynamic
+import Counter from '../components/Counter.svelte';
+import TextField from '../components/TextField.svelte';
+
+// using the Astro glob function to import all components dynamically
+const svelteComponents = await Astro.glob('../components/*.svelte');
+
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<section>
+	<h2>Using Both Components with the standart way to import with hydration</h2>
+	<Counter client:load/>
+	<TextField client:load/>
+</section>
+
+
+<section>
+	<h2>This works, but I would obvioulsy lacks interactivty</h2>
+	{svelteComponents.map((comp) => <comp.default/>)}
+</section>
+
+<section>
+	<h2>This will throw an Error</h2>
+	<!-- {svelteComponents.map((comp) => <comp.default client:load/>)} -->
+</section>
+
+
+<style>
+	* {
+		all: unset;
+	}
+	section {
+		margin: 2rem 0;
+		padding: 4px;
+		background-color: rgb(189, 168, 168);
+		display: block;
+	}
+</style>
